@@ -1,0 +1,119 @@
+  /components:
+    get:
+      tags:
+        - components
+      description: |
+        Returns all existent components
+      operationId: List Components
+      responses:
+        '200':
+          description: components list response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/models/Component'
+        '500':
+          $ref: '#/responses/InternalServerError'
+  /component/{ref}:
+    get:
+      tags:
+        - components
+      description: Returns a component based on a single ref or name search
+      operationId: Find Component
+      parameters:
+        - name: ref
+          in: path
+          description: Ref of component to fetch
+          required: true
+          schema:
+            type: string
+        - name: search
+          in: query
+          description: |
+            If set to some attribute of component it will try to fetch the component by it's {ref} value
+            Ex. GET /component/some_component?search=name
+            Will result in a search for a component with the name attribute equals to "some_component"
+          default: "ref"
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: component response
+          content:
+            application/json:
+              schema:
+                $ref: '#/models/Component'
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+    patch:
+      tags:
+        - components
+      description: update a component based on the Ref supplied
+      operationId: Update Component
+      parameters:
+        - name: ref
+          in: path
+          description: Ref of component to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Component to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/models/Component'
+      responses:
+        '200':
+          description: component updated
+        '400':
+          $ref: '#/responses/BadRequest'
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+    delete:
+      tags:
+        - components
+      description: deletes a single component based on the Ref supplied
+      operationId: Remove Component
+      parameters:
+        - name: ref
+          in: path
+          description: Ref of component to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: component deleted
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+  /component/:
+    post:
+      tags:
+        - components
+      description: create a component
+      operationId: Create Component
+      requestBody:
+        description: Component to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/models/Component'
+      responses:
+        '201':
+          description: component created
+        '400':
+          $ref: '#/responses/BadRequest'
+        '500':
+          $ref: '#/responses/InternalServerError'

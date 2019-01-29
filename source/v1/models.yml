@@ -1,0 +1,77 @@
+models:
+  Component:
+    type: object
+    properties:
+      ref:
+        type: string
+      name:
+        description: The component name
+        type: string
+      address:
+        description: The component address (IP, URL ... )
+        type: string
+
+  Incident:
+    type: object
+    properties:
+      status:
+        description: The incident status (0, 1 or 2)
+        type: integer
+        format: int64
+      description:
+        description: a brief description of the incident
+        type: string
+      occurrence_date:
+        description: the date and time the incident occurred
+        type: string
+        format: date-time
+      component_ref:
+        description: the component ref where the incident was reported
+        type: string
+
+  Client:
+    type: object
+    properties:
+      ref:
+        type: string
+      name:
+        description: the client name
+        type: string
+      resource_refs:
+        description: the list of component ref which this client uses
+        type: array
+        items:
+          type: string
+
+  PrometheusAlerts:
+    type: object
+    properties:
+      status:
+        description: the alert status ("RESOLVED","FIRING")
+        type: string
+      labels:
+        description: contains the Incident object from the alert
+        $ref: '#/models/Incident'
+      annotations:
+        description: contains the Component object from the alert
+        $ref: '#/models/Component'
+      startsAt:
+        description: the date and time the alert started
+        type: string
+        format: date-time
+      endsAt:
+        description: the date and time the alert ended
+        type: string
+        format: date-time
+      generatorURL:
+        description: the url to the alert origin
+        type: string
+        
+  PrometheusIncomingWebhook:
+    type: object
+    properties:
+      alerts:
+        description: the list of alerts sent by prometheus alertmanager
+        type: array
+        items:
+          $ref: '#/models/PrometheusAlerts'

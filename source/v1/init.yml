@@ -1,0 +1,59 @@
+openapi: "3.0.0"
+servers:
+  - url: //url-statuspage.com
+    description: Default server
+info:
+  description: |
+    This is the documentation of Involves's StatusPage API.
+  version: 1.0.0
+  title: StatusPage API Reference
+  contact:
+    name: GOA Team
+    email: infra@involves.com.br
+    url: https://involves.com.br
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+  x-logo:
+    url: ""
+    backgroundColor: "#FFFFFF"
+basePath: /v1
+tags:
+  - name: introduction
+    description: |
+      The Involves StatusPage API is used by StatusPage clients and third party applications to interact with the StatusPage backend.
+      ### Support
+      StatusPage collaborators work to keep the API documentation up-to-date.
+      If you have questions on API routes not listed in this reference, please open an issue or contact one of the collaborators.
+      [Bug reports](https://github.com/involvestecnologia/statuspage/issues) in the documentation or the API are also welcome, as are pull requests to fix the issues.
+      ### Contributing
+      When you have answers to API questions not addressed in our documentation we ask you to consider making a pull request to improve our reference.
+      The source code for this API reference is hosted at https://github.com/involvestecnologia/statuspage-api-reference.
+  - name: schema
+    description: |
+      All API access is through HTTP(S) requests at `your-statuspage.com/v1`. All request and response bodies are `application/json`.
+x-tagGroups:
+  - name: Introduction
+    tags:
+      - introduction
+      - schema      
+  - name: Endpoints
+    tags:
+      - components
+      - incidents
+      - clients
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+responses:
+  'BadRequest':
+    description: Invalid or missing parameters in URL or request body
+  'NotFound':
+    description: Resource not found
+  'InternalServerError':
+    description: Something went wrong with the server
+paths:

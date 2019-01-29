@@ -1,0 +1,109 @@
+  /clients:
+    get:
+      tags:
+        - clients
+      description: |
+        Returns all existent clients
+      operationId: List Clients
+      responses:
+        '200':
+          description: client list response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/models/Client'
+        '500':
+          $ref: '#/responses/InternalServerError'
+  /client/{ref}:
+    get:
+      tags:
+        - clients
+      description: Returns a client based on a single ref or name search
+      operationId: Find Client
+      parameters:
+        - name: ref
+          in: path
+          description: Ref of client to fetch
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: client response
+          content:
+            application/json:
+              schema:
+                $ref: '#/models/Client'
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+    patch:
+      tags:
+        - clients
+      description: update a client based on the Ref supplied
+      operationId: Update Client
+      parameters:
+        - name: ref
+          in: path
+          description: Ref of client to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Client to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/models/Client'
+      responses:
+        '200':
+          description: client updated
+        '400':
+          $ref: '#/responses/BadRequest'
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+    delete:
+      tags:
+        - clients
+      description: deletes a single client based on the Ref supplied
+      operationId: Remove Client
+      parameters:
+        - name: ref
+          in: path
+          description: Ref of client to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: client deleted
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+  /client/:
+    post:
+      tags:
+        - clients
+      description: create a client
+      operationId: Create Client
+      requestBody:
+        description: Client to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/models/Client'
+      responses:
+        '201':
+          description: client created
+        '400':
+          $ref: '#/responses/BadRequest'
+        '500':
+          $ref: '#/responses/InternalServerError'

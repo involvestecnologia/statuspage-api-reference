@@ -1,0 +1,78 @@
+  /incidents:
+    get:
+      tags:
+        - incidents
+      description: |
+        Returns all incidents
+      operationId: List Incidents
+      responses:
+        '200':
+          description: incidents list response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/models/Incident'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '500':
+          $ref: '#/responses/InternalServerError'
+  /incident/{componentRef}:
+    get:
+      tags:
+        - incidents
+      description: Returns the incidents based on a component ref or status search
+      operationId: Find Incidents
+      parameters:
+        - name: componentRef
+          in: path
+          description: Fetch the incidents related to the component Ref
+          required: true
+          schema:
+            type: string
+        - name: search
+          in: query
+          description: |
+            If set to some attribute of incident it will try to fetch the incident by it's {componentRef} value
+            Ex. GET /incident/0?search=status
+            Will result in a search for all incidents which status attribute is equals to 0
+          default: "component_ref"
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: incident response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/models/Incident'
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+  /incident/:
+    post:
+      tags:
+        - incidents
+      description: create a incident
+      operationId: Create Incident
+      requestBody:
+        description: Incident to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/models/Incident'
+      responses:
+        '201':
+          description: incident created
+        '400':
+          $ref: '#/responses/BadRequest'
+        '404':
+          $ref: '#/responses/BadRequest'
+        '500':
+          $ref: '#/responses/InternalServerError'
