@@ -1,10 +1,17 @@
   /components:
-    get:
+    post:
       tags:
         - components
       description: |
-        Returns all existent components
+        Returns a list of components
       operationId: List Components
+      requestBody:
+        description: List of components ref
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/models/ComponentRefs'
       responses:
         '200':
           description: components list response
@@ -14,6 +21,8 @@
                 type: array
                 items:
                   $ref: '#/models/Component'
+        '404':
+          $ref: '#/responses/NotFound'
         '500':
           $ref: '#/responses/InternalServerError'
   /component/{ref}:

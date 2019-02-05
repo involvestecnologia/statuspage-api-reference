@@ -75,3 +75,12 @@ models:
         type: array
         items:
           $ref: '#/models/PrometheusAlerts'
+
+  ComponentRefs:
+    type: object
+    properties:
+      refs:
+        description: List of component Refs
+        type: array
+        items:
+          type: string
