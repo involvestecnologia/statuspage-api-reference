@@ -15,9 +15,14 @@ models:
     type: object
     properties:
       status:
-        description: The incident status (0, 1 or 2)
+        description: The incident status (1, 2 or 3)
         type: integer
         format: int64
+        minimum: 1
+        maximum: 3
+      resolved:
+        description: indicates wheter the incient was resolved or not
+        type: boolean
       description:
         description: a brief description of the incident
         type: string
@@ -25,6 +30,10 @@ models:
         description: the date and time the incident occurred
         type: string
         format: date-time
+      duration:
+        description: the time duration until the incident was resolved
+        type: integer
+        format: int64
       component_ref:
         description: the component ref where the incident was reported
         type: string
