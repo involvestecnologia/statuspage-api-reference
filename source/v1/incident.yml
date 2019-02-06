@@ -5,6 +5,26 @@
       description: |
         Returns all incidents
       operationId: List Incidents
+      parameters:
+        - name: unresolved
+          in: query
+          description: Fetch current open incidents
+          default: false
+          required: false
+          schema:
+            type: bool
+        - name: month
+          in: query
+          description: filter the incident list to the ones that match by month can be complemented with year param
+          required: false
+          schema:
+            type: int
+        - name: year
+          in: query
+          description: filter the incident list to the ones that match by year can be complemented with month param
+          required: false
+          schema:
+            type: int
       responses:
         '200':
           description: incidents list response
@@ -35,8 +55,8 @@
           in: query
           description: |
             If set to some attribute of incident it will try to fetch the incident by it's {componentRef} value
-            Ex. GET /incident/0?search=status
-            Will result in a search for all incidents which status attribute is equals to 0
+            Ex. GET /incident/1?search=status
+            Will result in a search for all incidents which status attribute is equals to 1
           default: "component_ref"
           required: false
           schema:
@@ -58,8 +78,14 @@
     post:
       tags:
         - incidents
-      description: create a incident
-      operationId: Create Incident
+      description: |
+        If the component referenced has no incidents then it creates one.
+        Otherwise it will compare the last incident of that component, and creates if it passes in one of the rules bellow.
+        - The last status is **NOT OK** and the new status is a **OK** status
+        - The new status is **GREATER** than the last status
+        By matching the first rule, the last incident will be updated. It's resolved attribute will be set to true 
+        and the duration will have the nanoseconds duration from the occurence_date until the moment the OK status was received.
+      operationId: Create or Update Incident
       requestBody:
         description: Incident to create
         required: true
@@ -73,6 +99,6 @@
         '400':
           $ref: '#/responses/BadRequest'
         '404':
-          $ref: '#/responses/BadRequest'
+          $ref: '#/responses/NotFound'
         '500':
           $ref: '#/responses/InternalServerError'
