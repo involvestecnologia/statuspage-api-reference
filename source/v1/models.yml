@@ -10,6 +10,11 @@ models:
       address:
         description: The component address (IP, URL ... )
         type: string
+      labels:
+        description: the list of labels that categorize this component
+        type: array
+        items:
+          type: string
 
   Incident:
     type: object
@@ -90,6 +95,15 @@ models:
     properties:
       refs:
         description: List of component Refs
+        type: array
+        items:
+          type: string
+
+  ComponentLabels:
+    type: object
+    properties:
+      labels:
+        description: List of labels
         type: array
         items:
           type: string
