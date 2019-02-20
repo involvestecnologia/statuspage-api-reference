@@ -13,18 +13,20 @@
           required: false
           schema:
             type: bool
-        - name: month
+        - name: startDate
           in: query
-          description: filter the incident list to the ones that match by month can be complemented with year param
+          description: filter the incident list to the ones that occoured after this date
           required: false
           schema:
-            type: int
-        - name: year
+            type: string
+            format: date-time
+        - name: endDate
           in: query
-          description: filter the incident list to the ones that match by year can be complemented with month param
+          description: filter the incident list to the ones that occoured before this date
           required: false
           schema:
-            type: int
+            type: string
+            format: date-time
       responses:
         '200':
           description: incidents list response

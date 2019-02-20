@@ -15,7 +15,7 @@ info:
     name: MIT License
     url: https://opensource.org/licenses/MIT
   x-logo:
-    url: ""
+    url: "https://chat.involves.com.br/files/yoe546egbi8s3jw9u5ms6jt1rr/public?h=4X--Nr8cakQssb7LvF4GH5wEv1VKR---yQpYTxopKtM"
     backgroundColor: "#FFFFFF"
 basePath: /v1
 tags:
@@ -42,6 +42,7 @@ x-tagGroups:
       - components
       - incidents
       - clients
+      - prometheus
 schemes:
   - http
   - https

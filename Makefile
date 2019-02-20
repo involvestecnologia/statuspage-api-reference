@@ -15,6 +15,7 @@ build: dep
 	@cat $(DOC_SRC)/component.yml >> $(DOC_FILE)
 	@cat $(DOC_SRC)/incident.yml >> $(DOC_FILE)
 	@cat $(DOC_SRC)/client.yml >> $(DOC_FILE)
+	@cat $(DOC_SRC)/prometheus.yml >> $(DOC_FILE)
 	@cat $(DOC_SRC)/models.yml >> $(DOC_FILE)
 
 	@node_modules/redoc-cli/index.js validate $(DOC_FILE)
