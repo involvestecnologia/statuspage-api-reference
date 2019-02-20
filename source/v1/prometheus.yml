@@ -1,0 +1,21 @@
+  /prometheus/incoming:
+    post:
+      tags:
+        - prometheus
+      description: |
+        Prometheus Integration endpoint, allows incident and component creation from Prometheus Alertmanager webhooks 
+      operationId: Process Prometheus Alertmanager Webhook Data
+      requestBody:
+        description: Alermanager Payload with Annotation (Component) and Labels(Incident)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/models/PrometheusIncomingWebhook'
+      responses:
+        '201':
+          description: incident created
+        '400':
+          $ref: '#/responses/BadRequest'
+        '500':
+          $ref: '#/responses/InternalServerError'

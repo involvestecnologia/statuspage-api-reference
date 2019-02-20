@@ -57,6 +57,24 @@ models:
         items:
           type: string
 
+  PrometheusLabel:
+      type: object
+      properties:
+        status:
+          description: the incident status ("1","2" or "3")
+          type: string
+        description:
+          description: contains the Incident description
+          type: string
+        occurrence_date:
+          description: the date and time the incident occurred
+          type: string
+          format: date-time
+        component_ref:
+          description: the component ref where the incident was reported
+          type: string
+
+
   PrometheusAlerts:
     type: object
     properties:
@@ -65,7 +83,7 @@ models:
         type: string
       labels:
         description: contains the Incident object from the alert
-        $ref: '#/models/Incident'
+        $ref: '#/models/PrometheusLabel'
       annotations:
         description: contains the Component object from the alert
         $ref: '#/models/Component'
