@@ -4,6 +4,9 @@
   "description": "The StatusPage API documentation",
   "main": " ",
   "dependencies": {
+    "handlebars": "^4.1.2",
+    "js-yaml": "^3.13.1",
+    "marked": "^0.6.2",
     "redoc-cli": "^0.7.0"
   },
   "devDependencies": {},
