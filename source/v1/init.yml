@@ -10,12 +10,12 @@ info:
   contact:
     name: GOA Team
     email: infra@involves.com.br
-    url: https://involves.com.br
+    url: https://involves.com
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
   x-logo:
-    url: "https://chat.involves.com.br/files/yoe546egbi8s3jw9u5ms6jt1rr/public?h=4X--Nr8cakQssb7LvF4GH5wEv1VKR---yQpYTxopKtM"
+    url: "https://chat.involves.com/files/yoe546egbi8s3jw9u5ms6jt1rr/public?h=4X--Nr8cakQssb7LvF4GH5wEv1VKR---yQpYTxopKtM"
     backgroundColor: "#FFFFFF"
 basePath: /v1
 tags:
